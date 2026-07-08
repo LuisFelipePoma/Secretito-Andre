@@ -34,6 +34,7 @@ The agent is an approved copilot: it prepares artifacts, questions, alternatives
 | --- | --- |
 | `examples/hotel-pricing/` | AD&D Hotels example. |
 | `examples/clinic-appointments/` | Clinic appointment scheduling example to validate another domain. |
+| `examples/online-auctions/` | Nationwide online auction example with real-time bidding. |
 
 ## Acceptance Criteria
 

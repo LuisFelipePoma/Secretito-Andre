@@ -1,0 +1,59 @@
+# Phase 3 Input - Architectural Documentation
+
+## Source
+
+- `examples/online-auctions/02-architectural-design/iteration-plan.md`
+- `examples/online-auctions/02-architectural-design/design-decisions.md`
+
+## Approved Decisions
+
+| ID | Decision |
+| --- | --- |
+| ADR-001 | Route online and room bids through a per-auction bid sequencer and append-only ledger. |
+| ADR-002 | Use WebSocket gateway with pub/sub fanout by auction. |
+| ADR-003 | Use managed video streaming/CDN outside the bid command path. |
+| ADR-004 | Use tokenized payment provider with payment outbox. |
+| ADR-005 | Preserve immutable audit records with correlation IDs. |
+| ADR-006 | Use tenant and auction-house configuration boundaries. |
+
+## Elements To Document
+
+- Online Auction Web App.
+- Auction API.
+- Bidding Gateway.
+- Bid Sequencer.
+- Bid Ledger.
+- Bid Read Model.
+- Payment Outbox.
+- Reputation Projection.
+- Video Streaming/CDN Provider.
+- Metrics/Logging/Audit.
+
+## Interfaces And Events
+
+- `GET /auctions`
+- `POST /bidders`
+- `POST /auctions/{auctionId}/join`
+- `POST /auctions/{auctionId}/lots/{lotId}/bids`
+- `POST /auctions/{auctionId}/lots/{lotId}/live-bids`
+- `WS /auctions/{auctionId}/events`
+- `POST /auctions/{auctionId}/lots/{lotId}/close`
+- `BidReceived`
+- `BidAccepted`
+- `BidRejected`
+- `LotClosed`
+- `PaymentChargeRequested`
+- `PaymentCharged`
+- `ReputationUpdated`
+
+## Initial Stories
+
+- Browse auctions.
+- Register bidder with payment token.
+- Join live auction room.
+- Place online bid.
+- Enter live room bid.
+- Publish live bid feed.
+- Close lot and charge winner.
+- Update reputation index.
+- Review audit trail.

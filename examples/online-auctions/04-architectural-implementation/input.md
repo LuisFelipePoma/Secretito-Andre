@@ -1,0 +1,26 @@
+# Phase 4 Input - Architectural Implementation
+
+## Source
+
+- `examples/online-auctions/03-architectural-documentation/architecture-document.md`
+- `examples/online-auctions/02-architectural-design/design-decisions.md`
+
+## Stack And Library Constraints
+
+| Area | Choice | Constraint |
+| --- | --- | --- |
+| Frontend | Browser web app | Must support bidder and clerk live-auction workflows. |
+| Realtime | WebSocket gateway | Must publish per-auction ordered bid events. |
+| Backend | Auction API and bidding workers | Online and room bids enter the same sequencer. |
+| Database | Append-only bid ledger plus read models | Accepted bid order must be immutable and auditable. |
+| Payments | External tokenized payment provider | Raw card data cannot be stored. |
+| Video | Managed streaming/CDN provider | Video must not block bid command processing. |
+| Observability | Metrics/logging/tracing/audit | Live auction latency, failures and audit correlation must be visible. |
+
+## Inputs To Preserve
+
+- ADR-001 through ADR-006.
+- Traceability matrix.
+- Scrum handoff stories.
+- Governance checks.
+- REST/WebSocket interfaces and auction/payment/reputation events.
