@@ -1,0 +1,20 @@
+{
+  "name": "local-repository",
+  "interface": {
+    "displayName": "Local Repo"
+  },
+  "plugins": [
+    {
+      "name": "sam",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sam"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

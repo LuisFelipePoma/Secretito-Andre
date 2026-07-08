@@ -1,0 +1,26 @@
+{
+  "name": "sam",
+  "version": "1.0.2+codex.20260708163342",
+  "description": "Step-by-step SAM architecture workflow with approval gates and docs/arquitecture artifacts.",
+  "author": {
+    "name": "SAM Method"
+  },
+  "interface": {
+    "displayName": "SAM",
+    "shortDescription": "Run SAM architecture phases with approval gates.",
+    "longDescription": "Creates and updates SAM architecture artifacts under docs/arquitecture, tracks draft and approved gates, and prepares implementation slices for code agents.",
+    "developerName": "SAM Method",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "@sam init NAME=\"Project\"",
+      "@sam status",
+      "@sam next"
+    ],
+    "brandColor": "#2563EB"
+  },
+  "skills": "./skills/"
+}

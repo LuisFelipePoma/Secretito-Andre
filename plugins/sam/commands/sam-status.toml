@@ -1,0 +1,2 @@
+description = "Show SAM gate and artifact status"
+prompt = "Use @sam status. Report the SAM state from docs/arquitecture/.sam/state.json and list the next allowed action."

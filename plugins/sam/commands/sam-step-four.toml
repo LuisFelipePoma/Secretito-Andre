@@ -1,0 +1,2 @@
+description = "Generate phase 4 implementation plan draft"
+prompt = "Use @sam step-four {{args}}. Generate or revise docs/arquitecture/04-architectural-implementation/implementation-plan.md and design-system.md when frontend exists, after checking phase 3 approval."

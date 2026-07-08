@@ -1,0 +1,2 @@
+description = "Generate phase 1 architecture drivers draft"
+prompt = "Use @sam step-one {{args}}. Generate or revise docs/arquitecture/01-architectural-requirements/architecture-drivers.md as a Draft, after checking the SAM gate."

@@ -1,0 +1,2 @@
+description = "Show SAM quick help and next action"
+prompt = "Use @sam. Show a concise SAM command reference and run the equivalent of @sam status. Do not create or modify files unless the next action explicitly requires @sam init."
