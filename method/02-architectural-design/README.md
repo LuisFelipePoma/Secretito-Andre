@@ -17,7 +17,7 @@ Goal: design the architecture with ADD from approved drivers.
 3. Select design concepts: patterns, tactics, technologies, or architectures.
 4. Instantiate elements, responsibilities, interfaces, and collaborations.
 5. Record decisions and tradeoffs.
-6. Analyze whether drivers are satisfied, partially satisfied, or pending.
+6. Classify design coverage as `Addressed`, `Pending`, or `Accepted Risk`; reserve `Verified` and `Failed` for executed evidence.
 
 ## Output
 
@@ -25,10 +25,21 @@ Goal: design the architecture with ADD from approved drivers.
 - Selected concepts.
 - Architectural decisions.
 - ADD analysis.
+- Provisional design views embedded in `design-decisions.md`; phase 3 consolidates them into the living architecture document.
+- Driver-decision-pending-evidence traceability.
 
 ## Approval Gate
 
 The architect approves decisions, discarded alternatives, and covered drivers before moving to Architectural Documentation.
+
+### Exit checklist
+
+- Every primary driver is `Addressed`, `Pending`, or `Accepted Risk`; design work never marks a driver `Verified`.
+- Each `Addressed` driver links to an ADR and a pending `CHECK` that can verify its measure.
+- Provisional views describe affected boundaries and collaborations without consuming the phase 3 document.
+- Iteration, instantiation, consequences, and review triggers are recorded.
+
+Missing items block approval.
 
 ## Scenario Format
 

@@ -1,6 +1,6 @@
 ---
 name: sam-init
-description: Initialize SAM folders under docs/arquitecture. Trigger on /sam-init, @sam-init, or requests to initialize SAM.
+description: Initialize SAM under docs/architecture and compatibly migrate the legacy misspelled root. Trigger on /sam-init, @sam-init, or requests to initialize SAM.
 ---
 
 # SAM Init

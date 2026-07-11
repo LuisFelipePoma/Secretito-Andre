@@ -45,16 +45,16 @@ Out of initial scope:
 
 ## 5. Main Features
 
-- OA-1: Browse and choose auctions.
-- OA-2: Register bidder with credit card.
-- OA-3: Join live auction room.
-- OA-4: Watch live video stream.
-- OA-5: Place online bid.
-- OA-6: Enter live room bid.
-- OA-7: Publish bid feed to participants.
-- OA-8: Close lot, detect winner and charge card.
-- OA-9: Track participant reputation.
-- OA-10: Preserve audit trail for bid and payment activity.
+- REQ-001: Browse and choose auctions.
+- REQ-002: Register bidder with credit card.
+- REQ-003: Join live auction room.
+- REQ-004: Watch live video stream.
+- REQ-005: Place online bid.
+- REQ-006: Enter live room bid.
+- REQ-007: Publish bid feed to participants.
+- REQ-008: Close lot, detect winner and charge card.
+- REQ-009: Track participant reputation.
+- REQ-010: Preserve audit trail for bid and payment activity.
 
 ## 6. Expected Quality Attributes
 
@@ -96,3 +96,11 @@ Highest priority:
 - Scale active auctions without blocking growth.
 - Prove bid and payment history after disputes.
 - Charge winning bidders reliably.
+
+## 11. Risk And Tailoring Inputs
+
+Standard profile: real-time ordering, disputed transactions, nationwide fanout, payment integration, and high incident cost require explicit audit, recovery, and capacity evidence.
+
+## 12. Data, Security And Recovery
+
+Payment tokens and bidder identity are confidential; bid order is integrity-critical. Trust boundaries include clients, live-room staff, payment, and streaming providers. Sequencer recovery and rollback must preserve the append-only ledger.

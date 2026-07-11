@@ -1,6 +1,6 @@
 ---
 name: sam-next
-description: Run the next unblocked SAM step from docs/arquitecture state. Trigger on /sam-next, @sam-next, or SAM next requests.
+description: Run the next unblocked SAM step from docs/architecture state. Trigger on /sam-next, @sam-next, or SAM next requests.
 ---
 
 # SAM Next

@@ -38,13 +38,13 @@ Out of initial scope:
 
 ## 5. Main Features
 
-- CA-1: Register and log in.
-- CA-2: Search availability.
-- CA-3: Book appointment.
-- CA-4: Reschedule/cancel appointment.
-- CA-5: Receptionist manages doctor calendars.
-- CA-6: Doctor views daily schedule.
-- CA-7: Send notification request.
+- REQ-001: Register and log in.
+- REQ-002: Search availability.
+- REQ-003: Book appointment.
+- REQ-004: Reschedule/cancel appointment.
+- REQ-005: Receptionist manages doctor calendars.
+- REQ-006: Doctor views daily schedule.
+- REQ-007: Send notification request.
 
 ## 6. Expected Quality Attributes
 
@@ -83,3 +83,11 @@ Highest priority:
 - Book appointments quickly.
 - Protect patient data.
 - Ship MVP in 10 weeks.
+
+## 11. Risk And Tailoring Inputs
+
+Standard profile: confidential patient data, concurrent booking risk, external notifications, and moderate change cost require more than Lite, without High Assurance evidence for this illustrative MVP.
+
+## 12. Data, Security And Recovery
+
+Patient and appointment data are confidential. API authorization is a trust boundary; booking recovery must prevent confirmed double-bookings, and deployments require reversible schema changes.

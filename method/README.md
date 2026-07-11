@@ -29,6 +29,24 @@ project-brief.md
 
 The agent does not decide architecture. The agent prepares information, alternatives, and artifacts; the architect approves drivers, tradeoffs, and decisions.
 
+## Tailoring Profile
+
+Select one profile during intake and record it in every phase input.
+
+| Profile | Use when | Required depth |
+| --- | --- | --- |
+| Lite | Low criticality, small team, reversible decisions | Drivers, bounded decisions, context/container views, traceability, and slices. |
+| Standard | Material business risk, integrations, or moderate uncertainty | Lite plus component/sequence views where needed, operational scenarios, threat review, and fitness checks. |
+| High Assurance | Safety, financial, regulatory, privacy, or high cost of failure | Standard plus formal security/data review, resilience and recovery evidence, migration/rollback, and independent approvals. |
+
+The profile controls depth, not whether approval and traceability are required. Add a diagram only when it answers a stakeholder or implementation question.
+
+## Artifact Contract
+
+All governed artifacts use `Draft`, `In Review`, `Approved`, or `Superseded`. Approval records the approver, UTC date, and source artifact versions (Git commit or content hash). A gate is blocked when required sections, stable IDs, unresolved critical questions, or its exit checklist are missing. Revisions to an approved source mark dependent artifacts for review.
+
+Stable identifiers use `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK`. A primary driver must trace to at least one decision, implementation slice, and evidence-producing check.
+
 ## Minimum Output
 
 - Prioritized drivers.

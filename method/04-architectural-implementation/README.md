@@ -16,6 +16,7 @@ Goal: convert approved architecture into packages ready for a code agent or Scru
 3. Associate each slice with driver, ADR, story/use case, and architectural check.
 4. Define acceptance criteria and minimum tests per slice.
 5. Create `design-system.md` when the project has a frontend.
+6. Define dependencies, risks, rollback, affected boundaries, and expected architecture evidence per slice.
 
 ## Output
 
@@ -26,7 +27,14 @@ Goal: convert approved architecture into packages ready for a code agent or Scru
 
 ## Approval Gate
 
-The architect or tech lead approves that each slice respects drivers/ADRs and has minimum tests before passing it to the code agent.
+The architect or tech lead approves that each slice respects drivers/ADRs and has minimum tests before passing it to the code agent. Product/design approves the optional design system; its absence never blocks a backend-only project.
+
+### Exit checklist
+
+- Every primary driver links to at least one `SLICE` and `CHECK`.
+- Functional acceptance criteria and architecture checks are separate.
+- Dependencies, risks, rollback, and affected boundaries are explicit.
+- The design system exists only when applicable and records product/design approval.
 
 ## AI Agent Role
 

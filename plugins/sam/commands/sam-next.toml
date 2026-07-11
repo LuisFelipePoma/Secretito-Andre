@@ -1,2 +1,2 @@
 description = "Run the next unblocked SAM step"
-prompt = "Use @sam next. Determine the next allowed SAM action from docs/arquitecture/.sam/state.json and execute only that unblocked action."
+prompt = "Use @sam next. Determine the next allowed SAM action from docs/architecture/.sam/state.json and execute only that unblocked action."

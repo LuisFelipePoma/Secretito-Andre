@@ -1,2 +1,2 @@
 description = "Record architect approval for a SAM gate"
-prompt = "Use @sam approve {{args}}. Record explicit architect approval for the requested gate in docs/arquitecture/.sam/state.json. Do not approve anything if the gate argument is missing."
+prompt = "Use @sam approve {{args}}. Record explicit architect approval for the requested gate in docs/architecture/.sam/state.json. Do not approve anything if the gate argument is missing."

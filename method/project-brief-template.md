@@ -39,3 +39,11 @@ Dev, QA/integration, staging, production, deployment, monitoring, and support.
 ## 10. Customer Priorities
 
 What is critical, what can wait, and what tradeoffs are acceptable.
+
+## 11. Risk And Tailoring Inputs
+
+Criticality, uncertainty, size, regulation, privacy/safety exposure, cost of failure, and cost of change. The architect uses these inputs to select Lite, Standard, or High Assurance.
+
+## 12. Data, Security And Recovery
+
+Data classifications, trust boundaries, threat/compliance concerns, SLO/SLI expectations, recovery objectives, migration needs, and rollback expectations.

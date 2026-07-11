@@ -1,2 +1,2 @@
 description = "Generate phase 2 ADD design drafts"
-prompt = "Use @sam step-two {{args}}. Generate or revise docs/arquitecture/02-architectural-design/iteration-plan.md and design-decisions.md as Drafts, after checking phase 1 approval."
+prompt = "Use @sam step-two {{args}}. Generate or revise docs/architecture/02-architectural-design/iteration-plan.md and design-decisions.md as Drafts, after checking phase 1 approval."

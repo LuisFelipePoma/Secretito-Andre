@@ -8,7 +8,7 @@ Goal: leave enough evidence to build, review, and maintain the architecture.
 - Approved decisions.
 - Instantiated elements.
 - Interfaces, events, and responsibilities.
-- Satisfied or pending drivers.
+- Addressed, pending, verified, failed, or accepted-risk drivers, with evidence where applicable.
 - Initial stories/epics.
 
 ## Process
@@ -18,6 +18,7 @@ Goal: leave enough evidence to build, review, and maintain the architecture.
 3. Record ADRs or a decision table with alternatives and consequences.
 4. Link requirement, scenario, driver, decision, view, story, and check.
 5. Translate decisions into epics/stories and define governance checks.
+6. Record data classification, trust boundaries, threat review, SLO/SLI, recovery, deployment, migration, and rollback when required by the selected profile or drivers.
 
 ## Output
 
@@ -32,6 +33,15 @@ Goal: leave enough evidence to build, review, and maintain the architecture.
 Each critical story must link to a driver or decision. Decisions must have an associated view/diagram and check.
 
 The approved output from this phase feeds Architectural Implementation.
+
+### Exit checklist
+
+- Approved provisional views are consolidated; optional views state the question they answer.
+- Every primary driver traces to a decision, story, and evidence-producing `CHECK`.
+- Security, data, operations, recovery, migration, and rollback concerns required by the profile are addressed or accepted as risks.
+- ADR review triggers and supersession status are visible.
+
+Missing items block approval.
 
 ## AI Agent Role
 

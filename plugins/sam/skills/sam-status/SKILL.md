@@ -1,6 +1,6 @@
 ---
 name: sam-status
-description: Show SAM gate and artifact status from docs/arquitecture. Trigger on /sam-status, @sam-status, or SAM status requests.
+description: Show SAM gate and artifact status from docs/architecture. Trigger on /sam-status, @sam-status, or SAM status requests.
 ---
 
 # SAM Status

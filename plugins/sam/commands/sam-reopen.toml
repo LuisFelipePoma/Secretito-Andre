@@ -1,0 +1,2 @@
+description = "Reopen a SAM gate and supersede dependent artifacts"
+prompt = "Use @sam reopen {{args}}. Require GATE and REASON, reopen the requested gate, and mark its dependent artifacts Superseded."

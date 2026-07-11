@@ -1,2 +1,2 @@
-description = "Initialize SAM folders under docs/arquitecture"
-prompt = "Use @sam init {{args}}. Initialize the SAM workspace under docs/arquitecture. If no NAME is provided, use Project."
+description = "Initialize SAM folders under docs/architecture"
+prompt = "Use @sam init {{args}}. Initialize the SAM workspace under docs/architecture. If no NAME is provided, use Project."

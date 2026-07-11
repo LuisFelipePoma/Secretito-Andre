@@ -42,7 +42,7 @@ Use the workflow commands:
 @sam slice 1
 ```
 
-The plugin writes project artifacts under `docs/arquitecture/` and keeps approval gates in `docs/arquitecture/.sam/state.json`.
+The plugin writes project artifacts under `docs/architecture/` and keeps approval gates in `docs/architecture/.sam/state.json`. Existing `docs/arquitecture/` workspaces are detected and migrated compatibly.
 
 ## Structure
 
@@ -66,6 +66,8 @@ The plugin writes project artifacts under `docs/arquitecture/` and keeps approva
 ## Acceptance Criteria
 
 In 1 or 2 sessions, SAM should produce prioritized drivers, 3 to 7 architectural decisions, basic C4 views, an initial backlog, and risks. Each critical story must link to a driver or decision.
+
+SAM supports Lite, Standard, and High Assurance tailoring. In every profile, primary drivers retain end-to-end links to decisions, implementation slices, and evidence-producing architecture checks.
 
 ## Base Sources
 

@@ -37,12 +37,12 @@ Out of initial scope:
 
 ## 5. Main Features
 
-- HPS-1: Log In.
-- HPS-2: Change Prices.
-- HPS-3: Query Prices.
-- HPS-4: Manage Hotels.
-- HPS-5: Manage Rates.
-- HPS-6: Manage Users.
+- REQ-001: Log In.
+- REQ-002: Change Prices.
+- REQ-003: Query Prices.
+- REQ-004: Manage Hotels.
+- REQ-005: Manage Rates.
+- REQ-006: Manage Users.
 
 ## 6. Expected Quality Attributes
 
@@ -81,11 +81,19 @@ The company has multiple systems around hotel operations and commercial analysis
 
 Highest priority:
 
-- HPS-2 Change Prices.
-- HPS-3 Query Prices.
-- HPS-4 Manage Hotels.
-- QA-1 Performance.
-- QA-2 Reliability.
-- QA-3 Availability.
-- QA-4 Scalability.
-- QA-5 Security.
+- REQ-002 Change Prices.
+- REQ-003 Query Prices.
+- REQ-004 Manage Hotels.
+- QA-001 Performance.
+- QA-002 Reliability.
+- QA-003 Availability.
+- QA-004 Scalability.
+- QA-005 Security.
+
+## 11. Risk And Tailoring Inputs
+
+Standard profile: revenue-impacting pricing, high query growth, identity/CMS integrations, and material delivery risk require explicit operational and security evidence.
+
+## 12. Data, Security And Recovery
+
+Prices are internal business data and identity claims are confidential. API/identity and API/CMS boundaries require protection; publication recovery, reversible migrations, and rollback of query projections are required.

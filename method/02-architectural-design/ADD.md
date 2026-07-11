@@ -4,7 +4,7 @@ Attribute Driven Design is an iterative process to design software architectures
 
 ## Step 1: Review Inputs
 
-Review the approved drivers, the architecture document, and `iteration-plan.md`.
+Review the approved drivers, phase input, existing provisional design views, and `iteration-plan.md`.
 
 Confirm that the iteration has:
 
@@ -20,7 +20,7 @@ The goal of the iteration has been defined in `iteration-plan.md`. Review the go
 
 ## Step 3: Choose one or more elements of the system to refine
 
-Consider the diagrams in the architecture document and identify elements that will need to be refined to satisfy the drivers associated with the goal of the iteration.
+Consider the provisional views in `design-decisions.md` and identify elements that need refinement. The living architecture document does not exist until phase 3.
 Refinement can mean decomposition into finer-grained elements (top-down approach), combination of elements into coarser-grained elements (bottom-up approach), or improvement of previously identified elements. For greenfield development, in the first iteration, the only element to refine is the whole system.
 
 Answer with the list of elements to be refined and wait for user review.
@@ -43,9 +43,9 @@ Use an existing pattern or technology catalog when available. Do not brainstorm 
 
 In this step, the selected design concepts are adapted to address the drivers that compose the goal of the iteration, that is the meaning of instantiation. This may result in new elements created or existing elements changed.
 
-Modify the diagrams in the architecture document.
+Create or modify provisional Mermaid views in `design-decisions.md`.
 
-For the definition of interfaces, first create sequence diagrams that illustrate how the instantiated elements collaborate to support the user stories or quality attribute scenarios chosen in the goal of the iteration. Add these sequence diagrams to the corresponding section of the architecture document.
+For the definition of interfaces, first create sequence diagrams that illustrate how the instantiated elements collaborate to support the selected stories or scenarios. Add them to the provisional views section; phase 3 later consolidates approved views.
 
 Answer with instantiation decisions in a table:
 
@@ -67,13 +67,15 @@ Record only decisions that affect structure, quality attributes, deployment, int
 
 For this step, you must analyze if the design decisions made during the iteration were sufficient to address the drivers associated with the iteration goal. Answer with a table like the following:
 
-| Driver | Analysis result | Evidence | Next action |
-| ------ | --------------- | -------- | ----------- |
+| Driver | Coverage status | Decision | Pending evidence/check | Next action |
+| ------ | --------------- | -------- | ---------------------- | ----------- |
 
-The analysis result can have different states:
+Coverage status has these meanings:
 
-- Satisfied: If sufficient design decisions have been made to satisfy the driver
-- Partially satisfied: If some design decisions were made but more decisions are necessary
-- Not satisfied: If no design decisions were made during the iteration to satisfy the driver.
+- Addressed: an approved decision responds to the driver; verification is pending.
+- Verified: executed evidence meets the measure. This is recorded only after execution, never inferred during design.
+- Failed: executed evidence does not meet the measure.
+- Pending: the decision or evidence definition is incomplete.
+- Accepted Risk: the architect explicitly accepts the uncovered or failed condition.
 
-Update the traceability matrix in the architecture document when a driver is satisfied or delegated to Scrum.
+Update only the driver-decision-pending-evidence table in this phase. Phase 3 creates the complete traceability matrix.
