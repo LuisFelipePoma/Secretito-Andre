@@ -1,48 +1,32 @@
 # 03 - Architectural Documentation
 
-Goal: leave enough evidence to build, review, and maintain the architecture.
+Goal: turn approved design work into living architecture memory that stakeholders, implementers, operators, and agents can use.
 
-## Input
+## Inputs
 
-- Phase `input.md`, derived from the approved Architectural Design output.
-- Approved decisions.
-- Instantiated elements.
-- Interfaces, events, and responsibilities.
-- Addressed, pending, verified, failed, or accepted-risk drivers, with evidence where applicable.
-- Initial stories/epics.
+- Approved iteration plan and design decisions.
+- Instantiated elements, interfaces, behavior, provisional views, risks, checks, and phase `input.md` delta.
+- Stakeholders, their concerns, and the intended uses of the documentation.
 
 ## Process
 
-1. Document minimum C4 views: context, containers, and components when applicable.
-2. Add 4+1, database, or class diagram views only when they answer a real question.
-3. Record ADRs or a decision table with alternatives and consequences.
-4. Link requirement, scenario, driver, decision, view, story, and check.
-5. Translate decisions into epics/stories and define governance checks.
-6. Record data classification, trust boundaries, threat review, SLO/SLI, recovery, deployment, migration, and rollback when required by the selected profile or drivers.
+1. Identify documentation audiences, questions, and uses.
+2. Select the smallest set of views that answers those questions.
+3. Consolidate approved provisional views and document each view's elements, relations, legend, rationale, and known limitations.
+4. Add cross-view information: scope, drivers, scenarios, ADRs, interfaces, behavior, security/data/operations concerns, glossary, and risks.
+5. Trace primary drivers to decisions or accepted risks, views when relevant, and evidence-producing checks.
+6. Define governance, review triggers, drift handling, and reading guidance for humans and agents.
+
+C4, module, runtime, deployment, data, security, class, sequence, or other views are optional. Select notation after selecting the question; never add a diagram only to satisfy a template.
 
 ## Output
 
-- Living architecture document.
-- Architectural decisions.
-- Relevant interfaces and events.
-- Traceability matrix.
-- Handoff a Scrum.
+`architecture-document.md` is the governed living architecture package. The generated `docs/architecture/README.md` points agents to its approved version and related sources.
 
 ## Approval Gate
 
-Each critical story must link to a driver or decision. Decisions must have an associated view/diagram and check.
+The architect approves documentation sufficiency, view selection, cross-view consistency, risks, and traceability. Phase 3 approval completes the core SAM method. Delivery planning remains optional.
 
-The approved output from this phase feeds Architectural Implementation.
+## Agent Behavior
 
-### Exit checklist
-
-- Approved provisional views are consolidated; optional views state the question they answer.
-- Every primary driver traces to a decision, story, and evidence-producing `CHECK`.
-- Security, data, operations, recovery, migration, and rollback concerns required by the profile are addressed or accepted as risks.
-- ADR review triggers and supersession status are visible.
-
-Missing items block approval.
-
-## AI Agent Role
-
-The agent keeps documents consistent, generates diagrams, detects decisions without traceability, and reviews architecture-code drift. The architect validates the final version.
+Preserve decision rationale and uncertainty. Detect contradictions between views and ADRs. Keep implementation detail only when it constrains architecture or is needed to use an interface. Do not turn Draft content into authoritative guidance.

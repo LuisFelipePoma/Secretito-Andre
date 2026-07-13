@@ -1,14 +1,14 @@
 {
   "name": "sam",
-  "version": "1.0.2+codex.20260710180336",
-  "description": "Step-by-step SAM architecture workflow with validated approval gates and docs/architecture artifacts.",
+  "version": "1.0.2+codex.20260713010110",
+  "description": "Architect-led three-phase SAM workflow with living architecture memory and an optional delivery handoff.",
   "author": {
     "name": "SAM Method"
   },
   "interface": {
     "displayName": "SAM",
-    "shortDescription": "Run validated SAM architecture phases.",
-    "longDescription": "Creates and validates tailored SAM artifacts under docs/architecture, tracks approval and supersession, and prepares traceable implementation slices for code agents.",
+    "shortDescription": "Run three-phase, architect-led SAM.",
+    "longDescription": "Creates and validates tailored architecture memory under docs/architecture, tracks approval, drift, and supersession, and optionally prepares traceable delivery slices for code agents.",
     "developerName": "SAM Method",
     "category": "Productivity",
     "capabilities": [
@@ -17,8 +17,8 @@
     ],
     "defaultPrompt": [
       "@sam init NAME=\"Project\"",
-      "@sam status",
-      "@sam next"
+      "@sam next",
+      "@sam handoff"
     ],
     "brandColor": "#2563EB"
   },

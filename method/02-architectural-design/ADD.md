@@ -1,81 +1,43 @@
-# Attribute Driven Design
+# Attribute-Driven Design In SAM
 
-Attribute Driven Design is an iterative process to design software architectures. Use it after the Architectural Requirements phase has produced approved drivers.
+Use ADD after the Architectural Requirements gate is approved. Treat design and its working documentation as one activity: decisions and provisional views are recorded during each iteration, then consolidated in phase 3.
 
-## Step 1: Review Inputs
+## Preconditions
 
-Review the approved drivers, phase input, existing provisional design views, and `iteration-plan.md`.
+Confirm that significant functionality, quality scenarios, constraints, assumptions, and prioritized drivers are sufficient for the intended iteration. If a missing answer would materially change the design, record the question and stop. Otherwise record the assumption and risk.
 
-Confirm that the iteration has:
+## Iteration 1: Select The Target
 
-- Functional drivers, quality attribute scenarios, constraints, and concerns.
-- A prioritized list of drivers approved by the architect.
-- Enough context to choose design concepts without inventing requirements.
+Choose one element that needs design or refinement. In a greenfield first iteration, this is normally the whole system. In Evolution or Integration work, it may be an existing boundary, integration, deployment unit, or change area.
 
-If critical information is missing, answer with questions and wait for review.
+Record the iteration goal, selected element, and expected decision or view output.
 
-## Step 2: Establish goal for the iteration by selecting drivers
+## Iteration 2: Select Relevant ASRs
 
-The goal of the iteration has been defined in `iteration-plan.md`. Review the goal and associated drivers.
+Choose a cohesive, prioritized subset of approved drivers, significant functionality, constraints, concerns, and assumptions that affect the selected element. Do not introduce requirements that are absent from approved sources.
 
-## Step 3: Choose one or more elements of the system to refine
+## Iteration 3: Choose Design Concepts
 
-Consider the provisional views in `design-decisions.md` and identify elements that need refinement. The living architecture document does not exist until phase 3.
-Refinement can mean decomposition into finer-grained elements (top-down approach), combination of elements into coarser-grained elements (bottom-up approach), or improvement of previously identified elements. For greenfield development, in the first iteration, the only element to refine is the whole system.
+Evaluate no more than three viable concepts. Concepts may include tactics, architectural or design patterns, reference architectures, frameworks, managed services, existing components, or deployment approaches.
 
-Answer with the list of elements to be refined and wait for user review.
+Compare how each concept addresses the selected ASRs, its negative effects on other qualities, constraints, operational cost, delivery risk, and reversibility. Mark alternatives as discarded only with rationale.
 
-## Step 4: Choose One or More Design Concepts That Satisfy the Selected Drivers
+## Iteration 4: Instantiate Elements And Responsibilities
 
-In this step, design concepts are selected to achieve the iteration goal, these design concepts may include:
+Adapt selected concepts to the project. Identify new or changed elements, responsibilities, data ownership, trust boundaries, dependencies, and allocation decisions. Preserve existing constraints and migration needs for Evolution and Integration contexts.
 
-- Design patterns, reference architectures, architectural patterns, design patterns, and deployment patterns.
-- Externally developed components, frameworks, or specific cloud resources.
-- Tactics that address particular quality attributes.
+## Iteration 5: Define Collaborations And Interfaces
 
-Use an existing pattern or technology catalog when available. Do not brainstorm unlimited options. Answer with the selected design concepts, pros, cons, and discarded alternatives. Show this in a Markdown table and wait for review.
+Define the interactions needed by the selected stories or scenarios. Use a sequence, runtime, data-flow, module, deployment, or other provisional view only when it answers the iteration question. Record the audience, question, elements, relations, and legend for every view.
 
-| Design concept | Pros | Cons | Discarded alternatives |
-| -------------- | ---- | ---- | ---------------------- |
-|                |      |      |                        |
+## Iteration 6: Record Decisions And Checks
 
-## Step 5: Instantiate Architectural Elements, sketch views, allocate Responsibilities, and Define Interfaces
+Create ADRs only for decisions that affect structure, quality attributes, integration, deployment, data ownership, trust boundaries, or expensive-to-change technology. Record rationale, consequences, discarded alternatives, review triggers, and supersession status.
 
-In this step, the selected design concepts are adapted to address the drivers that compose the goal of the iteration, that is the meaning of instantiation. This may result in new elements created or existing elements changed.
+Define a `CHECK` for each quantitative or otherwise testable primary driver. A design decision makes coverage `Addressed`; only executed evidence can make it `Verified` or `Failed`.
 
-Create or modify provisional Mermaid views in `design-decisions.md`.
+## Iteration 7: Review And Continue
 
-For the definition of interfaces, first create sequence diagrams that illustrate how the instantiated elements collaborate to support the selected stories or scenarios. Add them to the provisional views section; phase 3 later consolidates approved views.
+Assess whether the selected drivers are Addressed, Pending, or Accepted Risk. Inventory remaining ASRs and select the next element or stop when further design would not reduce material risk.
 
-Answer with instantiation decisions in a table:
-
-| Instantiation decision | Rationale |
-| ---------------------- | --------- |
-
-Wait for user review.
-
-## Step 6: Record Design Decisions
-
-Design decisions are documented in the Architectural Decisions section using a table like the following one:
-
-| ID | Driver | Decision | Rationale | Discarded alternatives | Consequences |
-| -- | ------ | -------- | --------- | ---------------------- | ------------ |
-
-Record only decisions that affect structure, quality attributes, deployment, integration, data ownership, or expensive-to-change technology choices. Wait for user review.
-
-## Step 7: Perform Analysis of Current Design and Review Iteration Goal and Achievement of Design Purpose
-
-For this step, you must analyze if the design decisions made during the iteration were sufficient to address the drivers associated with the iteration goal. Answer with a table like the following:
-
-| Driver | Coverage status | Decision | Pending evidence/check | Next action |
-| ------ | --------------- | -------- | ---------------------- | ----------- |
-
-Coverage status has these meanings:
-
-- Addressed: an approved decision responds to the driver; verification is pending.
-- Verified: executed evidence meets the measure. This is recorded only after execution, never inferred during design.
-- Failed: executed evidence does not meet the measure.
-- Pending: the decision or evidence definition is incomplete.
-- Accepted Risk: the architect explicitly accepts the uncovered or failed condition.
-
-Update only the driver-decision-pending-evidence table in this phase. Phase 3 creates the complete traceability matrix.
+Update `iteration-plan.md` and `design-decisions.md` after every iteration. Architect approval is required for material tradeoffs, ADRs, and accepted risks, not for clerical updates.

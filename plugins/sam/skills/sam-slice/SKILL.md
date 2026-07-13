@@ -1,6 +1,6 @@
 ---
 name: sam-slice
-description: Emit the code-agent prompt for one SAM implementation slice. Trigger on /sam-slice, @sam-slice, or SAM slice requests.
+description: Emit the code-agent prompt for one slice from an approved optional SAM delivery handoff. Trigger on /sam-slice, @sam-slice, or SAM slice requests.
 ---
 
 # SAM Slice

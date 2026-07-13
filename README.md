@@ -1,74 +1,67 @@
 # SAM - Software Architecture Method
 
-Lightweight method to standardize architecture work in software projects with tight timelines.
+SAM is a lightweight, architect-led method for turning a software problem into approved, traceable architecture without losing delivery speed or project memory.
 
-SAM follows 4 phases: requirements, design, documentation, and architectural implementation to prepare work for a code agent or delivery team.
+It is designed for senior software architects and senior software engineers working on anything from a landing page or internal tool to an integration-heavy or distributed system. The amount of architecture work changes with risk and context; the architect's decision authority does not.
 
-1. [Architectural Requirements](method/01-architectural-requirements/README.md)
-2. [Architectural Design](method/02-architectural-design/README.md)
-3. [Architectural Documentation](method/03-architectural-documentation/README.md)
-4. [Architectural Implementation](method/04-architectural-implementation/README.md)
+## Three-Phase Method
 
-The full SAM entry point is [method/README.md](method/README.md).
+1. [Architectural Requirements](method/01-architectural-requirements/README.md): identify and prioritize architecturally significant requirements, constraints, quality scenarios, and assumptions.
+2. [Architectural Design](method/02-architectural-design/README.md): apply ADD iteratively, compare bounded alternatives, and record decisions, tradeoffs, and pending evidence.
+3. [Architectural Documentation](method/03-architectural-documentation/README.md): package stakeholder-relevant views and cross-view information as living architecture memory.
 
-Every project starts with a `project-brief.md`; use [method/project-brief-template.md](method/project-brief-template.md).
+[Delivery Handoff](method/delivery/README.md) is an optional extension that converts approved architecture into implementation slices. It is not a fourth architecture phase.
+
+Every project starts with a `project-brief.md`; use [method/project-brief-template.md](method/project-brief-template.md). The complete flow is in [method/README.md](method/README.md), and [method/foundations.md](method/foundations.md) maps SAM practices to their intellectual sources.
 
 ## AI Agent Role
 
-The agent is an approved copilot: it prepares artifacts, questions, alternatives, diagrams, ADRs, and the initial backlog. The architect sets priorities, accepts tradeoffs, and approves decisions.
+The agent prepares drafts, questions, alternatives, diagrams, ADR proposals, checks, and optional delivery slices. The architect edits and approves drivers, tradeoffs, risks, and architectural decisions. Draft or generated content is never final without explicit approval.
+
+Approved artifacts under `docs/architecture/` become living guidance for delivery teams and future agents. Draft and In Review artifacts remain proposals. Source drift blocks dependent approvals until the architect reopens and reviews them.
 
 ## Codex Plugin
 
 SAM includes a Codex plugin under `plugins/sam/`.
 
-Install it from this repository:
-
 ```powershell
 git clone https://github.com/LuisFelipePoma/SAM.git
 cd SAM
-codex plugin marketplace add .\.agents\plugins
+codex plugin marketplace add .
 codex plugin add sam@local-repository
 ```
 
-Open a new Codex thread after installing so the plugin is loaded.
-
-Use the workflow commands:
+Open a new Codex thread after installation or reinstall so the plugin is reloaded.
 
 ```text
 @sam init NAME="Project Name"
 @sam status
 @sam next
 @sam approve GATE="phase-1-drivers"
+@sam handoff
 @sam slice 1
 ```
 
-The plugin writes project artifacts under `docs/architecture/` and keeps approval gates in `docs/architecture/.sam/state.json`. Existing `docs/arquitecture/` workspaces are detected and migrated compatibly.
+The plugin creates three-phase artifacts under `docs/architecture/`, maintains a generated architecture index, and records approvals in `docs/architecture/.sam/state.json`. Existing `docs/arquitecture/` workspaces and legacy `04-architectural-implementation/` handoffs are migrated conservatively.
 
-## Structure
+## Tailoring
 
-| Path | Use |
-| --- | --- |
-| `method/` | 4-phase SAM method. |
-| `method/project-brief-template.md` | Initial input delivered by the client/team. |
-| `method/01-architectural-requirements/` | Quality attributes, ASRs, QAW-lite, utility tree, and prioritized list. |
-| `method/02-architectural-design/` | ADD and selection of patterns, tactics, technologies, and architectures. |
-| `method/03-architectural-documentation/` | C4, database view, 4+1, class diagrams, ADRs, interfaces, events, and traceability. |
-| `method/04-architectural-implementation/` | Implementation slices, stack, libraries, tests, and design system. |
+SAM tailors on two axes:
+
+- Rigor: `Lite`, `Standard`, or `High Assurance`.
+- System context: `Greenfield`, `Evolution`, or `Integration`.
+
+Views, ADRs, checks, and delivery artifacts are included only when justified by stakeholder questions, architectural significance, risk, or the selected profile. A Lite project may legitimately need no optional diagrams or material ADRs if that conclusion is recorded explicitly.
 
 ## Examples
 
-| Path | Use |
+| Path | Purpose |
 | --- | --- |
-| `examples/hotel-pricing/` | AD&D Hotels example. |
-| `examples/clinic-appointments/` | Clinic appointment scheduling example to validate another domain. |
-| `examples/online-auctions/` | Nationwide online auction example with real-time bidding. |
+| `examples/hotel-pricing/` | ADD-style pricing system with integrations and quality drivers. |
+| `examples/clinic-appointments/` | Transactional scheduling system in another business domain. |
+| `examples/online-auctions/` | Real-time, auditable auction platform. |
+| `examples/product-landing/` | Lite landing page showing proportional architecture work. |
 
 ## Acceptance Criteria
 
-In 1 or 2 sessions, SAM should produce prioritized drivers, 3 to 7 architectural decisions, basic C4 views, an initial backlog, and risks. Each critical story must link to a driver or decision.
-
-SAM supports Lite, Standard, and High Assurance tailoring. In every profile, primary drivers retain end-to-end links to decisions, implementation slices, and evidence-producing architecture checks.
-
-## Base Sources
-
-ADD/SEI, QAW-lite, Views and Beyond, C4, ADRs, enterprise architecture patterns, and evolutionary architecture.
+SAM succeeds when an architect can reach a sufficiently documented, explicitly approved architecture in proportion to the project's risk. Primary drivers must remain traceable to decisions or accepted risks and evidence-producing checks. Optional delivery handoffs additionally connect drivers and decisions to implementable slices.

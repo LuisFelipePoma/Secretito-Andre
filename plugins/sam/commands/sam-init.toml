@@ -1,2 +1,2 @@
-description = "Initialize SAM folders under docs/architecture"
-prompt = "Use @sam init {{args}}. Initialize the SAM workspace under docs/architecture. If no NAME is provided, use Project."
+description = "Initialize three-phase SAM architecture memory"
+prompt = "Use @sam init {{args}}. Initialize three-phase SAM under docs/architecture, maintain the root AGENTS.md SAM block, and use Project when NAME is absent."

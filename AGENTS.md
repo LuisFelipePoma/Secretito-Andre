@@ -1,39 +1,78 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Purpose And Operating Model
 
-This repository documents SAM, a four-phase Software Architecture Method. The root `README.md` is the entry point. Core method content lives in `method/`, with one folder per phase:
+SAM is a three-phase Software Architecture Method for senior software architects and senior software engineers who need to move quickly without losing decision quality or project memory. It applies to software-intensive work of different sizes and shapes, including landing pages, web applications, APIs, internal tools, integrations, and larger distributed systems.
 
-- `01-architectural-requirements/`
-- `02-architectural-design/`
-- `03-architectural-documentation/`
-- `04-architectural-implementation/`
+SAM is an architect-led, AI-assisted workflow. The agent analyzes inputs, exposes missing information, proposes bounded alternatives, drafts artifacts, and keeps approved information traceable. The architect reviews and edits those drafts, approves drivers and tradeoffs, accepts risks, and owns every architectural decision. Generated content is never final merely because an agent produced it.
 
-Shared starting material is in `method/project-brief-template.md`. Worked examples live under `examples/<domain>/` and mirror the phase structure, for example `examples/hotel-pricing/03-architectural-documentation/architecture-document.md`.
+The project-local `docs/architecture/` directory is living architecture memory. Approved artifacts guide delivery teams and future agents; Draft and In Review artifacts are proposals only. Agents must not contradict an approved driver or ADR silently. When an approved source changes, reopen it and review dependent artifacts before treating them as current.
 
-## Build, Test, and Development Commands
+## Method Structure
 
-There is no build system or package manager in this repo; changes are markdown-only.
+Core method content lives in `method/` and follows three phases:
 
-- `rg --files`: list tracked documentation files quickly.
-- `rg -n "TODO|TBD|FIXME" method examples`: find unfinished content before review.
-- `git diff --check`: catch trailing whitespace and common diff formatting issues.
-- `git diff -- README.md method examples`: review documentation changes before committing.
+- `01-architectural-requirements/`: identify and prioritize architecturally significant requirements and quality scenarios.
+- `02-architectural-design/`: apply ADD iteratively and record concepts, tradeoffs, ADRs, provisional views, and pending evidence.
+- `03-architectural-documentation/`: package stakeholder-relevant views and cross-view information into living documentation.
 
-## Coding Style & Naming Conventions
+`method/delivery/` is an optional post-method handoff. It turns approved architecture into implementation slices and can add a design system for projects with a user interface. It is not a fourth architecture phase and does not block completion of the three-phase method.
 
-Use Markdown with concise headings, short paragraphs, and tables where comparison matters. Keep phase artifact names stable: `input.md`, `architecture-drivers.md`, `design-decisions.md`, `architecture-document.md`, `implementation-plan.md`, and `design-system.md`. Use lowercase kebab-case for new directories and descriptive markdown filenames, matching existing examples. Keep terminology consistent: SAM, ADD, ASR, ADR, C4, drivers, decisions, and traceability.
+The root `README.md` is the repository entry point. Shared intake material is in `method/project-brief-template.md`; intellectual foundations and their mapping to SAM practices are in `method/foundations.md`. Worked examples live under `examples/<domain>/` and mirror the three phases, with optional delivery material under `examples/<domain>/delivery/`.
 
-## Testing Guidelines
+## Method Invariants
 
-No automated test framework is configured. Validate documentation by checking flow and traceability: each phase input should derive from the previous phase output, critical stories should link to drivers or ADRs, and examples should match the templates in `method/`. When updating templates, update at least one example or explicitly note why examples do not change.
+- Tailor on two axes: rigor (`Lite`, `Standard`, `High Assurance`) and system context (`Greenfield`, `Evolution`, `Integration`).
+- Use functional requirements, quality attribute scenarios, constraints, concerns, and assumptions as ADD inputs.
+- Select views because they answer stakeholder or implementation questions; do not require C4, UML, 4+1, or any other notation by default.
+- Give stable IDs to governed information: `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK`.
+- Trace each primary driver to an approved decision or explicitly accepted risk and to an evidence-producing check. Delivery handoffs additionally trace drivers to slices.
+- Use `Addressed` for design coverage. Use `Verified` or `Failed` only when executed evidence is recorded.
+- Preserve source versions, approval metadata, consequences, review triggers, and supersession history.
+- Do not impose a fixed number of ADRs or diagrams. A Lite project may legitimately record that no material architectural decision or optional view is needed.
 
-## Commit & Pull Request Guidelines
+## Project Structure And Stable Names
 
-Recent commits use imperative, sentence-style summaries such as `Refactor README files...`, `Remove output expectations...`, and `Add Architectural Implementation phase...`. Follow that style and keep commits scoped to one documentation change.
+Keep these artifact names stable: `project-brief.md`, `input.md`, `architecture-drivers.md`, `iteration-plan.md`, `design-decisions.md`, `architecture-document.md`, `implementation-plan.md`, and `design-system.md`. Use lowercase kebab-case for new directories and descriptive Markdown filenames.
 
-Pull requests should include the changed phase or example, the reason for the change, and any traceability impact. For example updates, mention which template or method rule was validated.
+The Codex plugin lives in `plugins/sam/`. Its state helper owns `docs/architecture/.sam/state.json`, creates an idempotent SAM block in a target project's `AGENTS.md`, and maintains the generated `docs/architecture/README.md` index. Plugin behavior must preserve existing user files and must stop rather than overwrite ambiguous migrations.
 
-## Agent-Specific Instructions
+## Build, Test, And Development Commands
 
-Agents prepare artifacts, questions, alternatives, diagrams, ADRs, and backlog drafts. The architect approves drivers, tradeoffs, and architectural decisions; do not present generated architecture as final without that approval.
+The method and examples are Markdown; the plugin also contains a Python state helper.
+
+- `rg --files`: list repository files.
+- `rg -n "TODO|TBD|FIXME|\[TODO:" README.md method examples plugins --glob '!plugins/sam/scripts/sam_state.py'`: find unfinished content while excluding validator literals.
+- `python3 plugins/sam/scripts/sam_state.py self-test`: exercise state, gates, drift, migration, and validation.
+- `python3 plugins/sam/scripts/sam_state.py template-parity`: verify public and executable templates are identical.
+- `python3 plugins/sam/scripts/sam_state.py validate-examples`: validate every example through synchronized temporary workspaces.
+- `git diff --check`: catch trailing whitespace and common formatting errors.
+- `git diff -- README.md AGENTS.md method examples plugins`: review method and plugin changes.
+
+Use the skill-creator and plugin-creator validators after editing plugin skills or the manifest. If their environment lacks PyYAML, run them through `uv` with a temporary `pyyaml` dependency rather than adding a runtime dependency to SAM.
+
+## Documentation Style
+
+Write canonical repository content and generated artifacts in English. The agent should converse in the user's language while preserving stable filenames, IDs, and status vocabulary. Use concise headings, short paragraphs, and tables when comparison or traceability matters. Keep terminology consistent: SAM, ADD, ASR, ADR, QAW, drivers, decisions, views, checks, evidence, and traceability.
+
+## Testing And Review Guidelines
+
+Validate both document shape and semantic flow:
+
+- each phase input derives from approved sources;
+- critical questions are resolved or explicitly accepted as risks;
+- primary drivers reach ADRs or accepted risks and `CHECK` definitions;
+- only executed evidence can mark a driver Verified or Failed;
+- optional views identify their audience and question;
+- approved-source hash drift blocks downstream approval;
+- examples conform to current templates and state validation.
+
+When templates or contracts change, update every structurally affected example and the plugin copy, then run the parity and state tests.
+
+## Commit And Pull Request Guidelines
+
+Use imperative, sentence-style summaries and keep commits scoped to one coherent documentation or plugin change. Pull requests should identify the changed phase or workflow, the motivation, compatibility or migration effects, and the traceability impact.
+
+## Intellectual Foundations
+
+SAM synthesizes, without reproducing, practices from Attribute-Driven Design and QAW from the Software Engineering Institute, Views and Beyond, architecture quality-attribute and evaluation literature, enterprise and architectural pattern catalogs, ADR practices, C4 where useful, and evolutionary architecture. `method/foundations.md` records the detailed source-to-practice mapping. These sources inform the workflow; they do not replace architect judgment or project-specific evidence.

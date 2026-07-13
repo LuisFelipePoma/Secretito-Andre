@@ -1,6 +1,6 @@
 ---
 name: sam-init
-description: Initialize SAM under docs/architecture and compatibly migrate the legacy misspelled root. Trigger on /sam-init, @sam-init, or requests to initialize SAM.
+description: Initialize three-phase SAM under docs/architecture, create architecture memory, and migrate legacy paths conservatively. Trigger on /sam-init, @sam-init, or requests to initialize SAM.
 ---
 
 # SAM Init

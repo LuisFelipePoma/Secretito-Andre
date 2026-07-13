@@ -6,7 +6,8 @@ Approved by: Example architect
 Approved date: Example snapshot
 Product/design approved by: Example product designer
 Product/design approved date: Example snapshot
-Tailoring profile: Standard
+Rigor profile: Standard
+System context: Greenfield
 Source artifacts:
 - `example input` @ repository snapshot
 

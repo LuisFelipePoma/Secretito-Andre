@@ -1,0 +1,2 @@
+description = "Generate the optional SAM delivery handoff"
+prompt = "Use @sam handoff {{args}}. After phase 3 approval, generate or revise docs/architecture/delivery/implementation-plan.md and create design-system.md only when a user interface needs it. This is not phase 4."

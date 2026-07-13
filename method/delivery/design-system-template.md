@@ -6,11 +6,13 @@ Approved by:
 Approved date:
 Product/design approved by:
 Product/design approved date:
+Rigor profile: Lite / Standard / High Assurance
+System context: Greenfield / Evolution / Integration
 Source artifacts:
-- `03-architectural-documentation/architecture-document.md`
-- `04-architectural-implementation/input.md`
+- `03-architectural-documentation/architecture-document.md` @ pending
+- `delivery/input.md` @ pending
 
-Use this file only when the project has a frontend.
+Use this file only when the project has a user interface that needs a shared design language. Product/design approval is independent from architecture approval.
 
 ## 1. Product / UI Principles
 

@@ -1,2 +1,2 @@
 description = "Generate phase 3 architecture document draft"
-prompt = "Use @sam step-three {{args}}. Generate or revise docs/architecture/03-architectural-documentation/architecture-document.md as a Draft, after checking phase 2 approval."
+prompt = "Use @sam step-three {{args}}. Generate question-driven living architecture documentation as a Draft after checking phase 2 approval."

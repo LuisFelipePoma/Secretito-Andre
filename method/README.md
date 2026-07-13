@@ -1,58 +1,75 @@
 # SAM - Software Architecture Method
 
-Practical method to move from a client problem to implementable architecture without losing control of information, decisions, and traceability.
+SAM moves from a client problem to approved, usable architecture while preserving decision authority, traceability, and project memory.
+
+## Operating Model
+
+The AI agent performs the expensive drafting work: it extracts information, finds gaps, proposes bounded alternatives, updates artifacts, and checks traceability. The architect reviews, modifies, and explicitly approves drivers, tradeoffs, accepted risks, and decisions.
+
+The workflow is hybrid. Generate a coherent phase draft when inputs are sufficient, but stop for a question when an unresolved issue would materially change the architecture. Do not require approval for mechanical drafting steps; do require it at governed gates.
 
 ## Initial Input
 
-Every project starts with a `project-brief.md`. This file is delivered by the client/team and must not contain final technical design.
-
-Use [project-brief-template.md](project-brief-template.md) as the base format.
+Every project starts with `project-brief.md`. It describes the problem and context without prescribing a final architecture. Use [project-brief-template.md](project-brief-template.md).
 
 ## Main Flow
 
-1. [Architectural Requirements](01-architectural-requirements/README.md): categorize quality attributes, prioritize tradeoffs, and obtain a prioritized driver list.
-2. [Architectural Design](02-architectural-design/README.md): run ADD with approved drivers and select patterns, tactics, technologies, and architectures.
-3. [Architectural Documentation](03-architectural-documentation/README.md): document views, decisions, interfaces, events, traceability, and Scrum handoff.
-4. [Architectural Implementation](04-architectural-implementation/README.md): convert approved architecture into implementable slices, stack/libraries, tests, and design system.
+1. [Architectural Requirements](01-architectural-requirements/README.md) turns the brief into prioritized ASRs, measurable quality scenarios, constraints, assumptions, and drivers.
+2. [Architectural Design](02-architectural-design/README.md) applies ADD iteratively and records alternatives, instantiated elements, interfaces, ADRs, provisional views, and checks.
+3. [Architectural Documentation](03-architectural-documentation/README.md) selects and consolidates the views and cross-view information required by stakeholders, implementers, operators, and agents.
 
-## Input Chain
+Architecture documentation begins during design; phase 3 packages and validates it rather than postponing documentation until design is finished.
+
+[Delivery Handoff](delivery/README.md) is optional after phase 3 approval. It prepares slices and code-agent context without becoming a fourth architecture gate.
+
+## Artifact Chain
 
 ```text
 project-brief.md
   -> 01-architectural-requirements/input.md
+  -> 01-architectural-requirements/architecture-drivers.md
   -> 02-architectural-design/input.md
+  -> 02-architectural-design/iteration-plan.md + design-decisions.md
   -> 03-architectural-documentation/input.md
-  -> 04-architectural-implementation/input.md
+  -> 03-architectural-documentation/architecture-document.md
+  -> delivery/implementation-plan.md (optional)
 ```
 
-## SAM Rule
+## Tailoring
 
-The agent does not decide architecture. The agent prepares information, alternatives, and artifacts; the architect approves drivers, tradeoffs, and decisions.
+Record both axes in every governed artifact.
 
-## Tailoring Profile
-
-Select one profile during intake and record it in every phase input.
-
-| Profile | Use when | Required depth |
+| Axis | Values | Effect |
 | --- | --- | --- |
-| Lite | Low criticality, small team, reversible decisions | Drivers, bounded decisions, context/container views, traceability, and slices. |
-| Standard | Material business risk, integrations, or moderate uncertainty | Lite plus component/sequence views where needed, operational scenarios, threat review, and fitness checks. |
-| High Assurance | Safety, financial, regulatory, privacy, or high cost of failure | Standard plus formal security/data review, resilience and recovery evidence, migration/rollback, and independent approvals. |
+| Rigor | Lite / Standard / High Assurance | Controls review depth, evidence, and assurance. |
+| System context | Greenfield / Evolution / Integration | Controls discovery, compatibility, migration, and boundary concerns. |
 
-The profile controls depth, not whether approval and traceability are required. Add a diagram only when it answers a stakeholder or implementation question.
+| Rigor | Typical use | Minimum depth |
+| --- | --- | --- |
+| Lite | Low criticality, small scope, reversible decisions | Essential drivers, explicit assumptions, only material decisions, question-driven views, and lightweight checks. |
+| Standard | Material business risk, integrations, moderate uncertainty | Lite plus operational/security concerns, runtime or deployment views as needed, and executable architecture checks. |
+| High Assurance | Regulatory, safety, privacy, financial, or high cost of failure | Standard plus formal reviews, resilience/recovery evidence, migration/rollback, and independent approvals where required. |
+
+The profile controls depth, not approval integrity. Project type never forces a diagram or pattern.
 
 ## Artifact Contract
 
-All governed artifacts use `Draft`, `In Review`, `Approved`, or `Superseded`. Approval records the approver, UTC date, and source artifact versions (Git commit or content hash). A gate is blocked when required sections, stable IDs, unresolved critical questions, or its exit checklist are missing. Revisions to an approved source mark dependent artifacts for review.
+Governed artifacts use `Draft`, `In Review`, `Approved`, or `Superseded`. Record approver, UTC approval date, rigor profile, system context, and source hashes. An approved source changed outside the workflow is drift; dependent approvals remain blocked until it is reopened.
 
-Stable identifiers use `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK`. A primary driver must trace to at least one decision, implementation slice, and evidence-producing check.
+Stable identifiers use `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK`. A primary driver traces to an approved ADR or an explicitly accepted risk and an evidence-producing check. `Verified` and `Failed` require executed evidence; design coverage uses `Addressed`, `Pending`, or `Accepted Risk`.
 
-## Minimum Output
+## Living Architecture Memory
 
-- Prioritized drivers.
-- ADD iteration plan.
-- 3 to 7 initial architectural decisions.
-- Basic C4 views and necessary diagrams.
-- Initial backlog with epics/stories linked to drivers or decisions.
-- Implementation plan with slices, criteria, tests, and constraints.
-- Design system when the project has a frontend.
+`docs/architecture/README.md` is the generated entry point for humans and agents. It lists the current gate, authoritative artifacts, constraints, and reading order. Approved artifacts constrain implementation. Draft artifacts may inform discussion but must not silently override approved content.
+
+When a driver, constraint, or decision changes, reopen the relevant gate. Mark dependent artifacts Superseded, preserve history in version control, and review downstream effects before implementation continues.
+
+## Minimum Outcome
+
+- Sufficient intake or explicit unresolved risks.
+- Prioritized architectural drivers and measurable scenarios where material.
+- ADD iterations proportional to architectural significance.
+- Approved ADRs or an explicit statement that no material decision is required.
+- Stakeholder-relevant views and cross-view rationale.
+- Traceability from primary drivers to decisions or accepted risks and checks.
+- Optional delivery slices when a team or code agent needs them.

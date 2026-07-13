@@ -1,119 +1,84 @@
 ---
 name: sam
-description: Run the SAM workflow commands (@sam init/status/next/step-one/step-two/step-three/step-four/approve/reopen/slice) and keep validated artifacts under docs/architecture.
+description: Run the three-phase SAM software architecture workflow and optional delivery handoff. Use when a user invokes @sam/$sam, wants architect-led AI drafting, needs approved architecture memory under docs/architecture, or asks for SAM status, drivers, ADD design, documentation, approval, reopening, handoff, or implementation slices.
 ---
 
 # SAM Workflow
 
-Use this skill when the user invokes `@sam`, `$sam`, or asks to run SAM step by step.
+Use the user's language for conversation. Keep canonical filenames, stable IDs, metadata fields, and generated artifacts in English.
 
 ## Core Rules
 
-- Write project artifacts only under `docs/architecture/`.
-- Keep method/source files untouched unless the user asks to change the method itself.
-- Do not mark an artifact approved unless the architect explicitly uses `approve`.
-- Treat generated artifacts as drafts.
-- Refuse phase advancement when the previous gate is not approved.
-- Use stable `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK` identifiers.
-- Never use `Verified` without executed evidence; a design decision only makes a driver `Addressed`.
-- Validate artifacts before approval and synchronize Markdown metadata with state.
-- Do not create custom `/sam` slash prompts in v1.
+- Treat SAM as three architecture phases: requirements, design, and documentation.
+- Treat delivery planning as an optional handoff, never as phase 4.
+- Let the agent draft and analyze; require the architect to approve drivers, material tradeoffs, ADRs, and accepted risks.
+- Treat Draft and In Review artifacts as proposals. Only Approved artifacts constrain implementation.
+- Write architecture artifacts under `docs/architecture/`; additionally maintain only the managed SAM block in root `AGENTS.md`.
+- Preserve existing user content and stop on ambiguous migrations.
+- Use `REQ`, `QA`, `CON`, `DRV`, `ADR`, `STORY`, `SLICE`, and `CHECK` identifiers.
+- Use `Addressed`, `Pending`, or `Accepted Risk` during design. Use `Verified` or `Failed` only with executed evidence metadata.
+- Ask only when an unresolved answer would change a primary driver, hard constraint, irreversible decision, or critical risk.
 
 ## State Helper
 
-Use the helper script at `../../scripts/sam_state.py`, resolved relative to this `SKILL.md`.
-
-Commands:
+Resolve `../../scripts/sam_state.py` relative to this file. Use it for deterministic state, scaffolding, source hashes, migration, validation, drift, and approval.
 
 ```bash
-python ../../scripts/sam_state.py init --name "Project Name"
+python ../../scripts/sam_state.py init --name "Project"
 python ../../scripts/sam_state.py status
 python ../../scripts/sam_state.py next
-python ../../scripts/sam_state.py can-run step-two
+python ../../scripts/sam_state.py can-run step-one
 python ../../scripts/sam_state.py mark-draft phase-1-drivers
 python ../../scripts/sam_state.py approve phase-1-drivers --approved-by "Architect"
-python ../../scripts/sam_state.py validate phase-1-drivers
 python ../../scripts/sam_state.py reopen phase-2-design --reason "Driver changed"
+python ../../scripts/sam_state.py handoff
 ```
 
-If the script path cannot be resolved, follow the same state contract manually in `docs/architecture/.sam/state.json`.
+If the helper cannot be resolved, follow the same contract manually in `docs/architecture/.sam/state.json`; never bypass a gate.
 
-## Supported Commands
+## Commands
 
-### `@sam init NAME="project-name"`
+### `@sam init NAME="project"`
 
-Run `sam_state.py init`. This creates:
+Run `init`. It creates the three-phase base files, `docs/architecture/README.md`, state v3, and an idempotent SAM block in root `AGENTS.md`. Ask the user to complete and review `project-brief.md`; its blank scaffold cannot be approved.
 
-```text
-docs/architecture/
-  project-brief.md
-  01-architectural-requirements/input.md
-  02-architectural-design/input.md
-  03-architectural-documentation/input.md
-  04-architectural-implementation/input.md
-  .sam/state.json
-```
+### `@sam status` and `@sam next`
 
-Then tell the user to fill or review `docs/architecture/project-brief.md`.
-Existing `docs/arquitecture/` workspaces are migrated only when the canonical root does not exist; conflicting roots require manual reconciliation.
-
-### `@sam status`
-
-Run `sam_state.py status` and report the current gate, artifact statuses, and next action.
-
-### `@sam next`
-
-Run `sam_state.py next`. Execute only the returned next action when it is unblocked.
+Run the matching helper command. Report drift, artifact authority, current core gate, optional delivery status, and one concrete next action. Never treat Superseded or drifted content as current.
 
 ### `@sam step-one`
 
-Run `sam_state.py can-run step-one`. Read:
-
-- `docs/architecture/project-brief.md`
-- `docs/architecture/01-architectural-requirements/input.md`
-- `references/templates.md`
-
-Generate or update the drivers artifact using the template. Include tailoring profile, versioned sources, stable IDs, measurable scenarios, driver proposal, tradeoffs, open questions, and a completed exit checklist. Then mark it draft.
+Run `can-run step-one`. Read `references/phase-one.md` and the generated base files. Produce a complete driver proposal without architecture choices, update `architecture-drivers.md`, then run `mark-draft phase-1-drivers`.
 
 ### `@sam step-two`
 
-Run `sam_state.py can-run step-two`. Read approved phase 1 output and phase 2 input. Create or update:
-
-- `docs/architecture/02-architectural-design/iteration-plan.md`
-- `docs/architecture/02-architectural-design/design-decisions.md`
-
-Use ADD with at most 3 concepts per driver group. Store provisional views in `design-decisions.md`, not in phase 3. Link primary drivers to ADRs and pending checks; use `Addressed`, `Pending`, or `Accepted Risk`, never `Verified`. Complete exit checklists and mark both artifacts draft.
+Run `can-run step-two`. Read `references/phase-two.md`. Update the iteration plan and design decisions with bounded alternatives, instantiation, useful provisional views, ADR proposals, risks, and checks. Pause for material authority decisions; otherwise complete the coherent draft. Mark both artifacts Draft.
 
 ### `@sam step-three`
 
-Run `sam_state.py can-run step-three`. Consolidate approved provisional views into the architecture document. Include only question-driven optional views, profile-required security/data/operations material, interfaces/events, stable stories, full traceability, evidence status, governance, and exit checklist. Then mark it draft.
+Run `can-run step-three`. Read `references/phase-three.md`. Select views from stakeholder questions, consolidate approved design information, complete traceability and agent guidance, then mark the architecture document Draft.
+
+### `@sam approve GATE="..."`
+
+Run helper approval only after the named human explicitly approves. Supported gates are `brief`, `phase-1-drivers`, `phase-2-design`, `phase-3-document`, optional `delivery`, and optional `design-system`. Validation, source hashes, order, and drift can block approval.
+
+### `@sam reopen GATE="..." REASON="..."`
+
+Run helper reopen. Preserve the reason, set the selected artifact Draft, and make dependent artifacts Superseded. Never edit an approved artifact silently.
+
+### `@sam handoff`
+
+Require phase 3 approval, run `handoff`, then read `references/delivery.md`. Generate the optional delivery plan. Create `design-system.md` from its asset only when a user interface needs shared design guidance and product/design ownership is known.
 
 ### `@sam step-four`
 
-Run `sam_state.py can-run step-four`. Generate the plan with stable slices, dependencies, affected boundaries, functional criteria, separate checks/evidence, tests, risks, rollback, and exit checklist. Generate `design-system.md` only for a frontend and record product/design approval separately. Then mark drafts.
-
-### `@sam approve GATE="phase-1-drivers"`
-
-Run `sam_state.py approve <gate> --approved-by "<name>"`.
-
-The helper blocks out-of-order approval, incomplete artifacts, unchecked exit criteria, missing IDs, and ambiguous design-validation statuses.
-
-Supported gates:
-
-- `brief`
-- `phase-1-drivers`
-- `phase-2-design`
-- `phase-3-document`
-- `phase-4-implementation`
-
-### `@sam reopen GATE="phase-2-design" REASON="driver changed"`
-
-Run `sam_state.py reopen <gate> --reason "<reason>"`. The selected gate becomes Draft and later dependent artifacts become Superseded.
+Treat as a deprecated alias for `@sam handoff`. Tell the user it is no longer a fourth architecture phase, then follow the handoff behavior.
 
 ### `@sam slice N`
 
-Require the phase 4 plan to be approved, then emit only the prompt for Slice N. Do not implement the slice.
+Require an Approved delivery plan. Emit only the requested slice prompt with authoritative sources, boundaries, criteria, checks, tests, risks, and rollback. Do not implement it.
 
-## Templates
+## Resources
 
-Read `references/templates.md` before generating phase artifacts.
+- Read `references/phase-one.md`, `phase-two.md`, `phase-three.md`, or `delivery.md` only for the active workflow.
+- Use `assets/templates/` as executable artifact scaffolds. Do not invent alternate required sections.

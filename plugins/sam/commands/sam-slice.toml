@@ -1,2 +1,2 @@
 description = "Emit the prompt for one implementation slice"
-prompt = "Use @sam slice {{args}}. Read docs/architecture/04-architectural-implementation/implementation-plan.md and emit only the requested slice prompt. Do not implement the slice."
+prompt = "Use @sam slice {{args}}. Read the approved docs/architecture/delivery/implementation-plan.md and emit only the requested slice prompt. Do not implement the slice."

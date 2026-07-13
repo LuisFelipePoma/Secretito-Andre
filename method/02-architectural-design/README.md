@@ -1,57 +1,34 @@
 # 02 - Architectural Design
 
-Goal: design the architecture with ADD from approved drivers.
+Goal: design enough architecture to address approved drivers and expose remaining risk, using iterative Attribute-Driven Design.
 
-## Input
+## Inputs
 
-- Phase `input.md`, derived from the approved Architectural Requirements output.
-- Prioritized driver list.
-- Measurable quality scenarios.
-- Constraints, concerns, risks, and priorities.
-- Allowed catalog of patterns, technologies, and architectures.
+- Approved `architecture-drivers.md` and phase `input.md` delta.
+- Rigor profile, system context, constraints, assumptions, accepted risks, and existing architecture when applicable.
+- Project-approved pattern, technology, or platform catalogs when they exist.
 
 ## Process
 
-1. Define the iteration goal.
-2. Choose elements to refine.
-3. Select design concepts: patterns, tactics, technologies, or architectures.
-4. Instantiate elements, responsibilities, interfaces, and collaborations.
-5. Record decisions and tradeoffs.
-6. Classify design coverage as `Addressed`, `Pending`, or `Accepted Risk`; reserve `Verified` and `Failed` for executed evidence.
+1. Plan iterations by element and cohesive groups of ASRs.
+2. Select an element and the relevant approved drivers for one iteration.
+3. Compare at most three viable patterns, tactics, technologies, or other design concepts.
+4. Instantiate elements, responsibilities, data ownership, collaborations, and interfaces.
+5. Sketch only the provisional views required to reason about the iteration.
+6. Record material ADRs, consequences, discarded alternatives, review triggers, and pending checks.
+7. Review the iteration goal and inventory remaining ASRs before continuing.
 
-## Output
+Use `Addressed`, `Pending`, or `Accepted Risk` for design coverage. Reserve `Verified` and `Failed` for executed evidence.
 
-- Iteration plan ADD.
-- Selected concepts.
-- Architectural decisions.
-- ADD analysis.
-- Provisional design views embedded in `design-decisions.md`; phase 3 consolidates them into the living architecture document.
-- Driver-decision-pending-evidence traceability.
+## Outputs
+
+- `iteration-plan.md`: intended and completed ADD iterations.
+- `design-decisions.md`: selected concepts, instantiation, ADRs, provisional views, risks, and driver/check coverage.
 
 ## Approval Gate
 
-The architect approves decisions, discarded alternatives, and covered drivers before moving to Architectural Documentation.
+The architect approves material concepts, tradeoffs, ADRs, accepted risks, and the sufficiency of remaining checks. A phase can contain zero ADRs only when the architect approves the explicit conclusion that no material, expensive-to-change decision is required.
 
-### Exit checklist
+## Agent Behavior
 
-- Every primary driver is `Addressed`, `Pending`, or `Accepted Risk`; design work never marks a driver `Verified`.
-- Each `Addressed` driver links to an ADR and a pending `CHECK` that can verify its measure.
-- Provisional views describe affected boundaries and collaborations without consuming the phase 3 document.
-- Iteration, instantiation, consequences, and review triggers are recorded.
-
-Missing items block approval.
-
-## Scenario Format
-
-| Field | Question |
-| --- | --- |
-| Source of stimulus | Who or what triggers the event? |
-| Stimulus | What happens? |
-| Artifact | Which part of the system receives the stimulus? |
-| Environment | Under what conditions does it happen? |
-| Response | What must the system do? |
-| Measure | How is the result validated? |
-
-## AI Agent Role
-
-The agent runs ADD step by step, proposes bounded alternatives, and prepares tradeoff tables. The architect approves each step before moving forward.
+Draft a complete proposal when constraints and drivers make the choices bounded. Pause when a critical tradeoff, irreversible technology choice, risk acceptance, or requirement ambiguity needs architect authority. Do not turn a design choice into Verified evidence.

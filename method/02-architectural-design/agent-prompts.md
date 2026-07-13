@@ -3,19 +3,17 @@
 ## Iteration Plan
 
 ```text
-With the approved drivers and domain vocabulary, create iteration-plan.md. The first iteration structures the system; following iterations address the highest-priority drivers. Each row must include number, goal, drivers, and likely elements to refine.
+Read the approved drivers and phase input. Plan ADD iterations by selected element and cohesive ASR group. For each iteration record the goal, drivers, element, expected output, and completion condition. Keep depth proportional to rigor and context.
 ```
 
-## ADD Step
+## Design Draft
 
 ```text
-Run the ADD iteration indicated in iteration-plan.md following method/02-architectural-design/ADD.md. Execute only one step per response and wait for architect approval before moving to the next step.
-
-Store provisional design views in design-decisions.md. Do not read or modify the phase 3 architecture document. Mark design coverage as Addressed, Pending, or Accepted Risk; never claim Verified without executed evidence.
+Execute the planned ADD iterations. Compare no more than three viable concepts per group, instantiate responsibilities and interfaces, record question-driven provisional views, and propose material ADRs with tradeoffs and review triggers. Ask only when a critical ambiguity, irreversible choice, or risk acceptance requires architect authority.
 ```
 
-## Tradeoffs
+## Coverage Review
 
 ```text
-For the selected drivers, propose at most 3 design concepts. Compare pros, cons, discarded alternatives, and consequences. Do not invent requirements or technologies outside the approved context.
+Map every primary driver to an ADR or explicit accepted risk and to a CHECK. Use Addressed, Pending, or Accepted Risk. Never use Verified or Failed without executed evidence metadata.
 ```

@@ -84,10 +84,14 @@ Highest priority:
 - Protect patient data.
 - Ship MVP in 10 weeks.
 
-## 11. Risk And Tailoring Inputs
+## 11. Risk, Rigor And System Context
 
-Standard profile: confidential patient data, concurrent booking risk, external notifications, and moderate change cost require more than Lite, without High Assurance evidence for this illustrative MVP.
+Rigor profile: Standard. System context: Greenfield. Confidential patient data, concurrent booking risk, external notifications, and moderate change cost require more than Lite, without High Assurance evidence for this illustrative MVP.
 
 ## 12. Data, Security And Recovery
 
 Patient and appointment data are confidential. API authorization is a trust boundary; booking recovery must prevent confirmed double-bookings, and deployments require reversible schema changes.
+
+## 13. Assumptions And Open Questions
+
+Managed cloud services and an external notification provider are available. Retention and provider retry limits require confirmation before production.

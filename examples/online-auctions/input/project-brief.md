@@ -97,10 +97,14 @@ Highest priority:
 - Prove bid and payment history after disputes.
 - Charge winning bidders reliably.
 
-## 11. Risk And Tailoring Inputs
+## 11. Risk, Rigor And System Context
 
-Standard profile: real-time ordering, disputed transactions, nationwide fanout, payment integration, and high incident cost require explicit audit, recovery, and capacity evidence.
+Rigor profile: Standard. System context: Integration. Real-time ordering, disputed transactions, nationwide fanout, payment integration, and high incident cost require explicit audit, recovery, and capacity evidence.
 
 ## 12. Data, Security And Recovery
 
 Payment tokens and bidder identity are confidential; bid order is integrity-critical. Trust boundaries include clients, live-room staff, payment, and streaming providers. Sequencer recovery and rollback must preserve the append-only ledger.
+
+## 13. Assumptions And Open Questions
+
+Managed video and payment providers can satisfy regional needs. Retention, dispute, and sequencer failover rules require explicit review.

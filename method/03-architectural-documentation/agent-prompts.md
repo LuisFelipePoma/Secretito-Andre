@@ -1,21 +1,19 @@
 # Agent Prompts - Architectural Documentation
 
-## Domain Model
+## View Selection
 
 ```text
-Create or update the domain model in the architecture document. Use Mermaid for the class diagram and a short table of responsibilities per entity. Do not include framework details.
+List the documentation audiences, their concerns, and the questions they must answer. Select the minimum useful set of views. For each view record audience, question, elements, relations, legend, rationale, and known limitations. Do not require C4 or UML.
 ```
 
-## Architecture Document
+## Architecture Package
 
 ```text
-Update the architecture document with decisions, affected views, interfaces, events, and traceability. Stay within the sections from method/03-architectural-documentation/template.md.
-
-Consolidate approved provisional views from design-decisions.md. Add optional diagrams only when they answer an explicit question. Preserve Addressed versus Verified: only executed evidence may use Verified.
+Consolidate approved provisional views and cross-view information into architecture-document.md. Include scope, drivers, scenarios, ADRs, interfaces/behavior, security/data/operations concerns as applicable, traceability, risks, governance, and agent reading guidance. Preserve source hashes and Addressed versus Verified semantics.
 ```
 
-## Scrum And Governance
+## Consistency Review
 
 ```text
-Transform approved decisions into epics/stories, functional acceptance criteria, and separate architecture checks. Verify that every primary driver reaches a decision, story, and evidence-producing check.
+Check that views agree with approved ADRs, every primary driver reaches an ADR or accepted risk and CHECK, and every optional view answers a stated question. Report contradictions or stale sources before approval.
 ```

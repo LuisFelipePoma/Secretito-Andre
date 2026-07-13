@@ -90,10 +90,14 @@ Highest priority:
 - QA-004 Scalability.
 - QA-005 Security.
 
-## 11. Risk And Tailoring Inputs
+## 11. Risk, Rigor And System Context
 
-Standard profile: revenue-impacting pricing, high query growth, identity/CMS integrations, and material delivery risk require explicit operational and security evidence.
+Rigor profile: Standard. System context: Evolution. Revenue-impacting pricing, high query growth, identity/CMS integrations, and material delivery risk require explicit operational and security evidence.
 
 ## 12. Data, Security And Recovery
 
 Prices are internal business data and identity claims are confidential. API/identity and API/CMS boundaries require protection; publication recovery, reversible migrations, and rollback of query projections are required.
+
+## 13. Assumptions And Open Questions
+
+Managed identity and cloud hosting remain available. CMS retry limits, price retention, and regional hosting requirements require confirmation.
